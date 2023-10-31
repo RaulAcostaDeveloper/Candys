@@ -1,0 +1,48 @@
+.CandyContainer{
+    display: block;
+}
+.CandyActive{
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+}
+// Buttons
+.candyButton-1{
+    margin: 5px;
+    button {
+        display: block;
+        width: 100px;
+        height: 50px;
+    }
+}
+.candyButton-2{
+    margin: 5px;
+    button {
+        display: block;
+        width: 150px;
+        height: 30px;
+        outline: none;
+        border: none;
+        background-color: brown;
+        color: wheat;
+    }
+}
+.candyButton-3{
+    button {
+        display: block;
+        width: 150px;
+        height: 30px;
+        outline: none;
+        border: none;
+        background-color: brown;
+        color: wheat;
+    }
+}
+// Inputs
+.candyInput-1{
+    margin: 5px;
+    input {
+        width: 150px;
+        height: 20px;
+    }
+}

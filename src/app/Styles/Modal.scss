@@ -1,0 +1,50 @@
+.containerModal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(7, 7, 7, 0.3);
+    .innerModal{
+        background-color: aliceblue;
+        min-width: 250px;
+        min-height: 100px;
+        .title{
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .close {
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            button{
+                width: 100px;
+                height: 25px;
+                background-color: brown;
+                color: aliceblue;
+            }
+        }
+    }
+}
+
+.bodyForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .candyInput-bodyForm-1{
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        input{
+            width: 100%;
+            height: 30px;
+        }
+    }
+}
