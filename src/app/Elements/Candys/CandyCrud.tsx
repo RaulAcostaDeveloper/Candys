@@ -1,3 +1,6 @@
+const pop = new Audio('./sounds/pop.mp3');
+const click = new Audio('./sounds/click.mp3');
+
 type Posicion = [number, number];
 export type CandyElement = {
     posicion: Posicion;
@@ -30,6 +33,9 @@ export const printCandyMatrix = () => {
 }
 
 // -------------------------------------------------------
+export const setIsKeyListenerActive = (toogle: boolean) => {
+    isKeyListenerActive = toogle;
+}
 // Escucha el evento en el candy
 const mandarAlertaDeCambioDeMatrix = () => {
     const event = new CustomEvent("cambioEnMatrix", {});
@@ -39,25 +45,27 @@ const mandarAlertaDeCambioDeMatrix = () => {
 // -------------------------------------------------------
 // Posicion actual
 export const setPosicionActualCandyMatrix = (posicion: Posicion) => {
-    // Quita el active de todas las posiciones
-    // Y activa el candy si coincide con la posición dada
-    let huboCandy = false;
-    CandyMatix.map((candy)=>{
-        if (candy.isActive) {
-            candy.isActive = false;
+    setTimeout(() => {
+        // Quita el active de todas las posiciones
+        // Y activa el candy si coincide con la posición dada
+        let huboCandy = false;
+        CandyMatix.map((candy)=>{
+            if (candy.isActive) {
+                candy.isActive = false;
+            }
+            if (candy.posicion[0] === posicion[0] && candy.posicion[1] === posicion[1]) {
+                candy.isActive = true;
+                huboCandy = true;
+            }
+        });
+        if (!huboCandy) {
+            console.log('ERROR CANDY');
+            console.log('No se encontró candy en la posición ', posicion);        
         }
-        if (candy.posicion[0] === posicion[0] && candy.posicion[1] === posicion[1]) {
-            candy.isActive = true;
-            huboCandy = true;
-        }
-    });
-    if (!huboCandy) {
-        console.log('ERROR CANDY');
-        console.log('No se encontró candy en la posición ', posicion);        
-    }
-    posicionActual = posicion;
-    indexCandyActual = findCandyIndexByPosision(posicionActual);    
-    mandarAlertaDeCambioDeMatrix();
+        posicionActual = posicion;
+        indexCandyActual = findCandyIndexByPosision(posicionActual);    
+        mandarAlertaDeCambioDeMatrix();
+    }, 10);
 }
 
 // -------------------------------------------------------
@@ -158,27 +166,35 @@ const handleKeyUp = (event: any): void => {
         switch (key.toLowerCase()) {
             case 'arrowdown':
                 setPosicionActualCandyMatrix(getCandyPositionBottom(posicionActual));
+                pop.play();
                 break;
             case 'keys':
                 setPosicionActualCandyMatrix(getCandyPositionBottom(posicionActual));
+                pop.play();
                 break;
             case 'arrowleft':
                 setPosicionActualCandyMatrix(getCandyPositionLeft(posicionActual));
+                pop.play();
                 break;
             case 'keya':
                 setPosicionActualCandyMatrix(getCandyPositionLeft(posicionActual));
+                pop.play();
                 break;
             case 'arrowup':
                 setPosicionActualCandyMatrix(getCandyPositionTop(posicionActual));
+                pop.play();
                 break;
             case 'keyw':
                 setPosicionActualCandyMatrix(getCandyPositionTop(posicionActual));
+                pop.play();
                 break;
             case 'arrowright':
                 setPosicionActualCandyMatrix(getCandyPositionRight(posicionActual));
+                pop.play();
                 break;
             case 'keyd':
                 setPosicionActualCandyMatrix(getCandyPositionRight(posicionActual));
+                pop.play();
                 break;
             case 'enter': // ENTER EVENT and Enter to input
                 CandyMatix[indexCandyActual].onEnter?.();
@@ -190,9 +206,11 @@ const handleKeyUp = (event: any): void => {
                         isKeyListenerActive = false;
                     }
                 }
+                click.play();
                 break;
             case 'space': // SPACE EVENT
                 CandyMatix[indexCandyActual].onSpace?.();
+                click.play();
             break;
             default:
                 break;
@@ -215,3 +233,10 @@ const handleKeyUp = (event: any): void => {
 
 // Ejecución inicial
 document.addEventListener('keyup', handleKeyUp);
+
+// Previene el presionado de la tecla tab
+document.addEventListener("keydown", function(event) {             
+    if (event.keyCode == 9) {
+        event.preventDefault();
+    }
+});

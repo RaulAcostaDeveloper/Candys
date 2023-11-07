@@ -8,11 +8,13 @@
 }
 // Buttons
 .candyButton-1{
+    width: 100px;
+    height: 50px;
     margin: 5px;
     button {
         display: block;
-        width: 100px;
-        height: 50px;
+        width: 100%;
+        height: 100%;
     }
 }
 .candyButton-2{
@@ -40,9 +42,11 @@
 }
 // Inputs
 .candyInput-1{
+    width: 150px;
+    height: 20px;
     margin: 5px;
     input {
-        width: 150px;
-        height: 20px;
+        width: 100%;
+        height: 100%;
     }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CandyElement, addCandy, deleteCandy, getCandyPositionBottom, getCandyPositionLeft, getCandyPositionRight, getCandyPositionTop, posicionActual, setPosicionActualCandyMatrix } from "./CandyCrud";
+import { CandyElement, addCandy, deleteCandy, getCandyPositionBottom, getCandyPositionLeft, getCandyPositionRight, getCandyPositionTop, posicionActual, setIsKeyListenerActive, setPosicionActualCandyMatrix } from "./CandyCrud";
 import React, { ReactNode } from 'react';
 
 type Props = {
@@ -37,13 +37,6 @@ export const CandyContainer = ({ children, posicion, onEnter, onSpace, idInput, 
         };
     },[]);
 
-    useEffect(()=>{
-        console.log('cambio onEnter ', posicion);
-        console.log(onEnter);
-        
-    },[onEnter])
-
-
     const handleCambioEnMatrix = () => {        
         // Pregunta si este candy es active
         if (posicion[0] === posicionActual[0] && posicion[1] === posicionActual[1] ) {
@@ -53,13 +46,20 @@ export const CandyContainer = ({ children, posicion, onEnter, onSpace, idInput, 
         }
     }
 
-    const setThisCandyActive = () => {        
+    const handleSelect = () => {
+        if (idInput) {
+            const inputElement = document.getElementById(idInput);
+            if (inputElement instanceof HTMLInputElement) {
+                inputElement.select();
+                setIsKeyListenerActive(false);
+            }
+        }
         setPosicionActualCandyMatrix(posicion);
     }
     return (
         <div
             className={`CandyContainer${isActive ? ' CandyActive ' : ' '}${className && className}`}
-            onClick={()=> setThisCandyActive() }>
+            onClick={()=> handleSelect() }>
             { children &&  children}
         </div>
     )
